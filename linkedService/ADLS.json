@@ -1,5 +1,5 @@
 {
-	"name": "DaperlovADLS",
+	"name": "ADLS",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
