@@ -2,11 +2,11 @@
 	"name": "MoviesS3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DaperlovS3",
+			"referenceName": "S3",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "ReadyDemo"
+			"name": "ADF_Lab"
 		},
 		"annotations": [],
 		"type": "DelimitedText",

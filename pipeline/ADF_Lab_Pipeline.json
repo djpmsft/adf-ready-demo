@@ -1,9 +1,10 @@
 {
-	"name": "ReadyDemoPipeline",
+	"name": "ADF_Lab_Pipeline",
 	"properties": {
+		"description": "Copying Data from s3 to ADLS and then using Mapping Data Flow for aggregation and writing to SQL DW",
 		"activities": [
 			{
-				"name": "MapData",
+				"name": "AggregateAndWriteToDW",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -23,14 +24,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "AggregateMoviesDB",
+						"referenceName": "AggregateMoviesDataFlow",
 						"type": "DataFlowReference"
 					},
 					"staging": {
-						"linkedService": {
-							"referenceName": "DaperlovBlob",
-							"type": "LinkedServiceReference"
-						},
 						"folderPath": "sample-data/ready-demo/staging"
 					}
 				}
@@ -79,7 +76,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "MoviesDB",
+						"referenceName": "MoviesADLS",
 						"type": "DatasetReference"
 					}
 				]

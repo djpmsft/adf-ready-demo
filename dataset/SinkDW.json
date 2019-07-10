@@ -1,12 +1,12 @@
 {
-	"name": "ReadyDemoDW",
+	"name": "SinkDW",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DemoDW",
+			"referenceName": "SQLDW",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "ReadyDemo"
+			"name": "ADF_Lab"
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
@@ -37,10 +37,7 @@
 				"type": "bigint",
 				"precision": 19
 			}
-		],
-		"typeProperties": {
-			"tableName": "[dbo].[ReadyDemoOutput]"
-		}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

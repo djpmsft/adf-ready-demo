@@ -1,12 +1,12 @@
 {
-	"name": "MoviesDB",
+	"name": "MoviesADLS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DaperlovADLS",
+			"referenceName": "ADLS",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "ReadyDemo"
+			"name": "ADF_Lab"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
