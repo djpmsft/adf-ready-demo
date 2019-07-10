@@ -26,6 +26,13 @@
 					"dataflow": {
 						"referenceName": "AggregateMoviesDataFlow",
 						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "Blob",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "sample-data/ready-demo/staging"
 					}
 				}
 			},

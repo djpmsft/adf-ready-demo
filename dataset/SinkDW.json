@@ -37,7 +37,10 @@
 				"type": "bigint",
 				"precision": 19
 			}
-		]
+		],
+		"typeProperties": {
+			"tableName": "ADF_Lab_Sink"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
