@@ -2,7 +2,7 @@
 
 *Get One liner from Anand*
 
-In this Lab, we will utilize Azure Data Factory's visual authoring experience to create a pipeline that copies data stored in Amazon S3 to Azure Data Lake Storage Gen2 and then executes a Mapping Data Flow to transform and write to a SQL data ware house.
+In this Lab, we will utilize Azure Data Factory's visual authoring experience to create a pipeline that copies data stored in Amazon S3 to Azure Data Lake Storage Gen2 and then executes a Mapping Data Flow to transform and write to a SQL Data Warehouse.
 
 ## Prerequisites
 
