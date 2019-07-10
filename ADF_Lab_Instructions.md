@@ -1,4 +1,4 @@
-# ADF Lab
+# Movies Analytics using Azure Data Factory
 
 *Get One liner from Anand*
 
