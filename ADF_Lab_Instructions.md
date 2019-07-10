@@ -2,6 +2,9 @@
 
 *Get One liner from Anand*
 
+> [!NOTE]
+> If you're new to Azure Data Factory, see [Introduction to Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/introduction).
+
 In this Lab, we will utilize Azure Data Factory's visual authoring experience to create a pipeline that copies data stored in Amazon S3 to Azure Data Lake Storage Gen2 and then executes a Mapping Data Flow to transform and write to a SQL Data Warehouse.
 
 ## Prerequisites
@@ -14,4 +17,5 @@ In this Lab, we will utilize Azure Data Factory's visual authoring experience to
 ## Setting up your environment
 
 * **Create your data factory:** Use the [Azure Portal](https://portal.azure.com) to create your Data Factory. Detailed instructions can be found at [Create a Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-portal)
-..* Mapping
+  * Mapping Data Flow is not currently available in the following data factory regions: West Central US, Brazil South and France Central
+* **Create your linked services** 
