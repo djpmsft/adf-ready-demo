@@ -1,5 +1,5 @@
 {
-	"name": "DaperlovBlob",
+	"name": "Blob",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
