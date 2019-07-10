@@ -1,0 +1,46 @@
+{
+	"name": "ReadyDemoDW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DemoDW",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ReadyDemo"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "PrimaryGenre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "year",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AverageRating",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "HighestRated",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LowestRated",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NumberOfMovies",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[ReadyDemoOutput]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
