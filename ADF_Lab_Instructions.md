@@ -17,6 +17,7 @@ In this Lab, we will utilize Azure Data Factory's visual authoring experience to
 
 * **Create your data factory:** Use the [Azure Portal](https://portal.azure.com) to create your Data Factory. Detailed instructions can be found at [Create a Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-portal)
   * Mapping Data Flow is not currently available in the following data factory regions: West Central US, Brazil South and France Central
+* **Upload the [MoviesDB csv file](../moviesDB.csv) to S3 storage**
 * **Create your linked services** You will need to create four linked services for this lab
   * [ADLS Gen2](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-data-lake-storage)
   * [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-blob-storage)
