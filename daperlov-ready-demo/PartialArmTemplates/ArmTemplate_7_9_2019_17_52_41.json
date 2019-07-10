@@ -1,0 +1,49 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "daperlov-ready-demo"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AggregateMoviesDB')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "ReadyDemo"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "MoviesDB",
+								"type": "DatasetReference"
+							},
+							"name": "MoviesDB"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ReadyDemoDW",
+								"type": "DatasetReference"
+							},
+							"name": "SinkToDW"
+						}
+					],
+					"script": "\n\nsource(output(\n\t\tmovie as string,\n\t\ttitle as string,\n\t\tgenres as string,\n\t\tyear as string,\n\t\tRating as string,\n\t\t{Rotton Tomato} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MoviesDB\nAggregateRatings alterRow(upsertIf(true())) ~> UpsertIfTrue\nFilterYears derive(PrimaryGenre = iif(locate('|', genres) > 1, left(genres, locate('|', genres) - 1), genres)) ~> DerivePrimaryGenre\nDerivePrimaryGenre window(over(PrimaryGenre,\n\t\tyear),\n\tdesc({Rotten Tomato}, true),\n\tRatingsRank = rank()) ~> RankMoviesByRatings\nRankMoviesByRatings aggregate(groupBy(PrimaryGenre,\n\t\tyear),\n\tAverageRating = avg(toInteger({Rotten Tomato})),\n\t\tHighestRated = first(title),\n\t\tLowestRated = last(title),\n\t\tNumberOfMovies = count()) ~> AggregateRatings\nMoviesDB select(mapColumn(\n\t\tmovie,\n\t\ttitle,\n\t\tgenres,\n\t\tyear,\n\t\t{Rotten Tomato} = {Rotton Tomato}\n\t)) ~> SelectAndRename\nSelectAndRename filter(toInteger(year) > 1900) ~> FilterYears\nUpsertIfTrue sink(input(\n\t\tPrimaryGenre as string,\n\t\tyear as string,\n\t\tAverageRating as double,\n\t\tHighestRated as string,\n\t\tLowestRated as string,\n\t\tNumberOfMovies as long\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tstaged: true,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:['PrimaryGenre','year'],\n\tpartitionBy('hash', 1)) ~> SinkToDW"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "daperlov-ready-demo"
+		},
+		"DaperlovADLS_accountKey": {
+			"value": ""
+		},
+		"DaperlovBlob_connectionString": {
+			"value": ""
+		},
+		"DaperlovS3_secretAccessKey": {
+			"value": ""
+		},
+		"DemoDW_connectionString": {
+			"value": ""
+		},
+		"DaperlovADLS_properties_typeProperties_url": {
+			"value": "https://perlovskybugbash.dfs.core.windows.net"
+		},
+		"DaperlovS3_properties_typeProperties_accessKeyId": {
+			"value": "AKIA4IN7G3CBVPXCU3LN"
+		}
+	}
+}

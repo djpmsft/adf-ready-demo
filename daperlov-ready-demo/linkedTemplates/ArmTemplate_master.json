@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "daperlov-ready-demo"
+		},
+		"DaperlovADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'DaperlovADLS'"
+		},
+		"DaperlovBlob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DaperlovBlob'"
+		},
+		"DaperlovS3_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'DaperlovS3'"
+		},
+		"DemoDW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DemoDW'"
+		},
+		"DaperlovADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://perlovskybugbash.dfs.core.windows.net"
+		},
+		"DaperlovS3_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "AKIA4IN7G3CBVPXCU3LN"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DaperlovADLS_accountKey": {
+						"value": "[parameters('DaperlovADLS_accountKey')]"
+					},
+					"DaperlovBlob_connectionString": {
+						"value": "[parameters('DaperlovBlob_connectionString')]"
+					},
+					"DaperlovS3_secretAccessKey": {
+						"value": "[parameters('DaperlovS3_secretAccessKey')]"
+					},
+					"DemoDW_connectionString": {
+						"value": "[parameters('DemoDW_connectionString')]"
+					},
+					"DaperlovADLS_properties_typeProperties_url": {
+						"value": "[parameters('DaperlovADLS_properties_typeProperties_url')]"
+					},
+					"DaperlovS3_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('DaperlovS3_properties_typeProperties_accessKeyId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
