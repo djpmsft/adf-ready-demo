@@ -7,29 +7,29 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "daperlov-ready-demo"
 		},
-		"DaperlovADLS_accountKey": {
+		"ADLS_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'DaperlovADLS'"
+			"metadata": "Secure string for 'accountKey' of 'ADLS'"
 		},
-		"DaperlovBlob_connectionString": {
+		"Blob_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DaperlovBlob'"
+			"metadata": "Secure string for 'connectionString' of 'Blob'"
 		},
-		"DaperlovS3_secretAccessKey": {
+		"S3_secretAccessKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'DaperlovS3'"
+			"metadata": "Secure string for 'secretAccessKey' of 'S3'"
 		},
-		"DemoDW_connectionString": {
+		"SQLDW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DemoDW'"
+			"metadata": "Secure string for 'connectionString' of 'SQLDW'"
 		},
-		"DaperlovADLS_properties_typeProperties_url": {
+		"ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://perlovskybugbash.dfs.core.windows.net"
 		},
-		"DaperlovS3_properties_typeProperties_accessKeyId": {
+		"S3_properties_typeProperties_accessKeyId": {
 			"type": "string",
-			"defaultValue": "AKIA4IN7G3CBVPXCU3LN"
+			"defaultValue": "AKIA4IN7G3CB57RI2VMG"
 		},
 		"containerUri": {
 			"type": "string",
@@ -58,23 +58,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"DaperlovADLS_accountKey": {
-						"value": "[parameters('DaperlovADLS_accountKey')]"
+					"ADLS_accountKey": {
+						"value": "[parameters('ADLS_accountKey')]"
 					},
-					"DaperlovBlob_connectionString": {
-						"value": "[parameters('DaperlovBlob_connectionString')]"
+					"Blob_connectionString": {
+						"value": "[parameters('Blob_connectionString')]"
 					},
-					"DaperlovS3_secretAccessKey": {
-						"value": "[parameters('DaperlovS3_secretAccessKey')]"
+					"S3_secretAccessKey": {
+						"value": "[parameters('S3_secretAccessKey')]"
 					},
-					"DemoDW_connectionString": {
-						"value": "[parameters('DemoDW_connectionString')]"
+					"SQLDW_connectionString": {
+						"value": "[parameters('SQLDW_connectionString')]"
 					},
-					"DaperlovADLS_properties_typeProperties_url": {
-						"value": "[parameters('DaperlovADLS_properties_typeProperties_url')]"
+					"ADLS_properties_typeProperties_url": {
+						"value": "[parameters('ADLS_properties_typeProperties_url')]"
 					},
-					"DaperlovS3_properties_typeProperties_accessKeyId": {
-						"value": "[parameters('DaperlovS3_properties_typeProperties_accessKeyId')]"
+					"S3_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('S3_properties_typeProperties_accessKeyId')]"
 					}
 				}
 			},

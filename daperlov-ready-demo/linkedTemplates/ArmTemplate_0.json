@@ -7,29 +7,29 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "daperlov-ready-demo"
 		},
-		"DaperlovADLS_accountKey": {
+		"ADLS_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'DaperlovADLS'"
+			"metadata": "Secure string for 'accountKey' of 'ADLS'"
 		},
-		"DaperlovBlob_connectionString": {
+		"Blob_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DaperlovBlob'"
+			"metadata": "Secure string for 'connectionString' of 'Blob'"
 		},
-		"DaperlovS3_secretAccessKey": {
+		"S3_secretAccessKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'DaperlovS3'"
+			"metadata": "Secure string for 'secretAccessKey' of 'S3'"
 		},
-		"DemoDW_connectionString": {
+		"SQLDW_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'DemoDW'"
+			"metadata": "Secure string for 'connectionString' of 'SQLDW'"
 		},
-		"DaperlovADLS_properties_typeProperties_url": {
+		"ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://perlovskybugbash.dfs.core.windows.net"
 		},
-		"DaperlovS3_properties_typeProperties_accessKeyId": {
+		"S3_properties_typeProperties_accessKeyId": {
 			"type": "string",
-			"defaultValue": "AKIA4IN7G3CBVPXCU3LN"
+			"defaultValue": "AKIA4IN7G3CB57RI2VMG"
 		}
 	},
 	"variables": {
@@ -37,37 +37,37 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DaperlovADLS')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('DaperlovADLS_properties_typeProperties_url')]",
+					"url": "[parameters('ADLS_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('DaperlovADLS_accountKey')]"
+						"value": "[parameters('ADLS_accountKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DaperlovBlob')]",
+			"name": "[concat(parameters('factoryName'), '/Blob')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('DaperlovBlob_connectionString')]"
+					"connectionString": "[parameters('Blob_connectionString')]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DaperlovS3')]",
+			"name": "[concat(parameters('factoryName'), '/S3')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -75,39 +75,39 @@
 				"type": "AmazonS3",
 				"typeProperties": {
 					"serviceUrl": "",
-					"accessKeyId": "[parameters('DaperlovS3_properties_typeProperties_accessKeyId')]",
+					"accessKeyId": "[parameters('S3_properties_typeProperties_accessKeyId')]",
 					"secretAccessKey": {
 						"type": "SecureString",
-						"value": "[parameters('DaperlovS3_secretAccessKey')]"
+						"value": "[parameters('S3_secretAccessKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DemoDW')]",
+			"name": "[concat(parameters('factoryName'), '/SQLDW')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureSqlDW",
 				"typeProperties": {
-					"connectionString": "[parameters('DemoDW_connectionString')]"
+					"connectionString": "[parameters('SQLDW_connectionString')]"
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/MoviesDB')]",
+			"name": "[concat(parameters('factoryName'), '/MoviesADLS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "DaperlovADLS",
+					"referenceName": "ADLS",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "ReadyDemo"
+					"name": "ADF_Lab"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -150,7 +150,7 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DaperlovADLS')]"
+				"[concat(variables('factoryId'), '/linkedServices/ADLS')]"
 			]
 		},
 		{
@@ -159,11 +159,11 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "DaperlovS3",
+					"referenceName": "S3",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "ReadyDemo"
+					"name": "ADF_Lab"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -206,20 +206,20 @@
 				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DaperlovS3')]"
+				"[concat(variables('factoryId'), '/linkedServices/S3')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ReadyDemoDW')]",
+			"name": "[concat(parameters('factoryName'), '/SinkDW')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "DemoDW",
+					"referenceName": "SQLDW",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "ReadyDemo"
+					"name": "ADF_Lab"
 				},
 				"annotations": [],
 				"type": "AzureSqlDWTable",
@@ -252,58 +252,60 @@
 					}
 				],
 				"typeProperties": {
-					"tableName": "[[dbo].[ReadyDemoOutput]"
+					"tableName": "ADF_Lab_Sink"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DemoDW')]"
+				"[concat(variables('factoryId'), '/linkedServices/SQLDW')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AggregateMoviesDB')]",
+			"name": "[concat(parameters('factoryName'), '/AggregateMoviesDataFlow')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "This Data Flow does the following:\n1. Take in a Movies csv file with 6 columns stored in ADLS\n2. Renaming one column and dropping another\n3. Filtering out movies released before 1900\n4. Deriving the primary genre as a new column from the existing genres column\n5. Windowing over year and primary genre to rank movies based on their Rotten Tomatoes rating\n6. Aggregating Movies based on year and primary genre to figure out average rating and the highest/lowest rated movies\n7. Specifying an Upsert condition\n8. Writing to a SQL DW sink",
 				"folder": {
-					"name": "ReadyDemo"
+					"name": "ADF_Lab"
 				},
 				"type": "MappingDataFlow",
 				"typeProperties": {
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "MoviesDB",
+								"referenceName": "MoviesADLS",
 								"type": "DatasetReference"
 							},
-							"name": "MoviesDB",
+							"name": "MoviesADLS",
 							"typeProperties": {}
 						}
 					],
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "ReadyDemoDW",
+								"referenceName": "SinkDW",
 								"type": "DatasetReference"
 							},
 							"name": "SinkToDW"
 						}
 					],
-					"script": "\n\nsource(output(\n\t\tmovie as string,\n\t\ttitle as string,\n\t\tgenres as string,\n\t\tyear as string,\n\t\tRating as string,\n\t\t{Rotton Tomato} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MoviesDB\nAggregateRatings alterRow(upsertIf(true())) ~> UpsertIfTrue\nFilterYears derive(PrimaryGenre = iif(locate('|', genres) > 1, left(genres, locate('|', genres) - 1), genres)) ~> DerivePrimaryGenre\nDerivePrimaryGenre window(over(PrimaryGenre,\n\t\tyear),\n\tdesc({Rotten Tomato}, true),\n\tRatingsRank = rank()) ~> RankMoviesByRatings\nRankMoviesByRatings aggregate(groupBy(PrimaryGenre,\n\t\tyear),\n\tAverageRating = avg(toInteger({Rotten Tomato})),\n\t\tHighestRated = first(title),\n\t\tLowestRated = last(title),\n\t\tNumberOfMovies = count()) ~> AggregateRatings\nMoviesDB select(mapColumn(\n\t\tmovie,\n\t\ttitle,\n\t\tgenres,\n\t\tyear,\n\t\t{Rotten Tomato} = {Rotton Tomato}\n\t)) ~> SelectAndRename\nSelectAndRename filter(toInteger(year) > 1900) ~> FilterYears\nUpsertIfTrue sink(input(\n\t\tPrimaryGenre as string,\n\t\tyear as string,\n\t\tAverageRating as double,\n\t\tHighestRated as string,\n\t\tLowestRated as string,\n\t\tNumberOfMovies as long\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tstaged: true,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:['PrimaryGenre','year'],\n\tpartitionBy('hash', 1)) ~> SinkToDW"
+					"script": "\n\nsource(output(\n\t\tmovie as string,\n\t\ttitle as string,\n\t\tgenres as string,\n\t\tyear as string,\n\t\tRating as string,\n\t\t{Rotton Tomato} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MoviesADLS\nAggregateRatings alterRow(upsertIf(true())) ~> UpsertIfTrue\nFilterYearsBefore1900 derive(PrimaryGenre = iif(locate('|', genres) > 1, left(genres, locate('|', genres) - 1), genres)) ~> DerivePrimaryGenre\nDerivePrimaryGenre window(over(PrimaryGenre,\n\t\tyear),\n\tdesc({Rotten Tomato}, true),\n\tRatingsRank = rank()) ~> RankMoviesByRatings\nRankMoviesByRatings aggregate(groupBy(PrimaryGenre,\n\t\tyear),\n\tAverageRating = avg(toInteger({Rotten Tomato})),\n\t\tHighestRated = first(title),\n\t\tLowestRated = last(title),\n\t\tNumberOfMovies = count()) ~> AggregateRatings\nMoviesADLS select(mapColumn(\n\t\tmovie,\n\t\ttitle,\n\t\tgenres,\n\t\tyear,\n\t\t{Rotten Tomato} = {Rotton Tomato}\n\t)) ~> SelectAndRename\nSelectAndRename filter(toInteger(year) > 1900) ~> FilterYearsBefore1900\nUpsertIfTrue sink(input(\n\t\tPrimaryGenre as string,\n\t\tyear as string,\n\t\tAverageRating as double,\n\t\tHighestRated as string,\n\t\tLowestRated as string,\n\t\tNumberOfMovies as long\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tformat: 'table',\n\tstaged: true,\n\tdeletable:false,\n\tinsertable:false,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:['PrimaryGenre','year'],\n\tpartitionBy('hash', 1)) ~> SinkToDW"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/MoviesDB')]",
-				"[concat(variables('factoryId'), '/datasets/ReadyDemoDW')]"
+				"[concat(variables('factoryId'), '/datasets/MoviesADLS')]",
+				"[concat(variables('factoryId'), '/datasets/SinkDW')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ReadyDemoPipeline')]",
+			"name": "[concat(parameters('factoryName'), '/ADF_Lab')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "This pipeline does the following:\n1. Copies a delimited text movies database from S3 to ADLS gen 2\n2. Executes a Mapping Data Flow to calculate aggregate metrics by year and genre, and then write to a SQL DW",
 				"activities": [
 					{
-						"name": "MapData",
+						"name": "AggregateAndWriteToDW",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -323,17 +325,17 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "AggregateMoviesDB",
+								"referenceName": "AggregateMoviesDataFlow",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"MoviesDB": {},
+									"MoviesADLS": {},
 									"SinkToDW": {}
 								}
 							},
 							"staging": {
 								"linkedService": {
-									"referenceName": "DaperlovBlob",
+									"referenceName": "Blob",
 									"type": "LinkedServiceReference"
 								},
 								"folderPath": "sample-data/ready-demo/staging"
@@ -385,7 +387,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "MoviesDB",
+								"referenceName": "MoviesADLS",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -395,10 +397,10 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/AggregateMoviesDB')]",
-				"[concat(variables('factoryId'), '/linkedServices/DaperlovBlob')]",
+				"[concat(variables('factoryId'), '/dataflows/AggregateMoviesDataFlow')]",
+				"[concat(variables('factoryId'), '/linkedServices/Blob')]",
 				"[concat(variables('factoryId'), '/datasets/MoviesS3')]",
-				"[concat(variables('factoryId'), '/datasets/MoviesDB')]"
+				"[concat(variables('factoryId'), '/datasets/MoviesADLS')]"
 			]
 		}
 	]

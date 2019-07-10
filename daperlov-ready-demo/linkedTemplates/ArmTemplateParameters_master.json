@@ -5,23 +5,23 @@
 		"factoryName": {
 			"value": "daperlov-ready-demo"
 		},
-		"DaperlovADLS_accountKey": {
+		"ADLS_accountKey": {
 			"value": ""
 		},
-		"DaperlovBlob_connectionString": {
+		"Blob_connectionString": {
 			"value": ""
 		},
-		"DaperlovS3_secretAccessKey": {
+		"S3_secretAccessKey": {
 			"value": ""
 		},
-		"DemoDW_connectionString": {
+		"SQLDW_connectionString": {
 			"value": ""
 		},
-		"DaperlovADLS_properties_typeProperties_url": {
+		"ADLS_properties_typeProperties_url": {
 			"value": "https://perlovskybugbash.dfs.core.windows.net"
 		},
-		"DaperlovS3_properties_typeProperties_accessKeyId": {
-			"value": "AKIA4IN7G3CBVPXCU3LN"
+		"S3_properties_typeProperties_accessKeyId": {
+			"value": "AKIA4IN7G3CB57RI2VMG"
 		},
 		"containerUri": {
 			"value": ""

@@ -6,30 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "daperlov-ready-demo"
-		},
-		"ADLS_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'ADLS'"
-		},
-		"Blob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Blob'"
-		},
-		"S3_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'S3'"
-		},
-		"SQLDW_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'SQLDW'"
-		},
-		"ADLS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://perlovskybugbash.dfs.core.windows.net"
-		},
-		"S3_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "AKIA4IN7G3CB57RI2VMG"
 		}
 	},
 	"variables": {
@@ -65,12 +41,7 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "AggregateMoviesDataFlow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"MoviesADLS": {},
-									"SinkToDW": {}
-								}
+								"type": "DataFlowReference"
 							},
 							"staging": {
 								"linkedService": {
@@ -120,15 +91,13 @@
 						"inputs": [
 							{
 								"referenceName": "MoviesS3",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "MoviesADLS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -137,7 +106,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/AggregateMoviesDataFlow')]",
-				"[concat(variables('factoryId'), '/linkedServices/Blob')]",
 				"[concat(variables('factoryId'), '/datasets/MoviesS3')]",
 				"[concat(variables('factoryId'), '/datasets/MoviesADLS')]"
 			]
@@ -194,9 +162,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLS')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/MoviesS3')]",
@@ -250,9 +216,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/S3')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SinkDW')]",
@@ -300,69 +264,6 @@
 					"tableName": "ADF_Lab_Sink"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLDW')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('ADLS_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('ADLS_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Blob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('Blob_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/S3')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AmazonS3",
-				"typeProperties": {
-					"serviceUrl": "",
-					"accessKeyId": "[parameters('S3_properties_typeProperties_accessKeyId')]",
-					"secretAccessKey": {
-						"type": "SecureString",
-						"value": "[parameters('S3_secretAccessKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLDW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDW",
-				"typeProperties": {
-					"connectionString": "[parameters('SQLDW_connectionString')]"
-				}
-			},
 			"dependsOn": []
 		},
 		{
@@ -382,8 +283,7 @@
 								"referenceName": "MoviesADLS",
 								"type": "DatasetReference"
 							},
-							"name": "MoviesADLS",
-							"typeProperties": {}
+							"name": "MoviesADLS"
 						}
 					],
 					"sinks": [
