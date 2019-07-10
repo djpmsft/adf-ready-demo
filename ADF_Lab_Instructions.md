@@ -26,4 +26,6 @@ In this Lab, we will utilize Azure Data Factory's visual authoring experience to
   
 ## Copy Data From Amazon S3 to Azure Data Lake Storage Gen2
   
-First we use a Copy Activity to move 
+1. Click on the + button in the Factory Resources pane and select **Pipeline**
+2. In the Activities pane, open the **Move and Transform** accordion and drag the **Copy Data** activity onto the pipeline canvas
+3. 
