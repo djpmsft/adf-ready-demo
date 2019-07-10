@@ -1,5 +1,5 @@
 {
-	"name": "DaperlovS3",
+	"name": "S3",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
