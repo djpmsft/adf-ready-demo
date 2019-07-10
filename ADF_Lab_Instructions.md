@@ -23,6 +23,6 @@ In this Lab, we will utilize Azure Data Factory's visual authoring experience to
   * [Aure SQL DW](https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-sql-data-warehouse)
   * [Amazon S3](https://docs.microsoft.com/en-us/azure/data-factory/connector-amazon-simple-storage-service)
   
-  ## Copy Data From Amazon S3 to Azure Data Lake Storage Gen2
+## Copy Data From Amazon S3 to Azure Data Lake Storage Gen2
   
-  First we use a Copy Activity to move 
+First we use a Copy Activity to move 
