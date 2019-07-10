@@ -1,5 +1,5 @@
 {
-	"name": "DemoDW",
+	"name": "SQLDW",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
