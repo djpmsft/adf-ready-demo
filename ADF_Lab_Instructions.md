@@ -78,7 +78,7 @@ Now that you have moved the data into ADLS, you are ready to build a Mapping Dat
 
     ![Window Sort](./images/WindowSort.PNG "Window Sort")
 
-    ![Window Bound](./images/Windowbound.PNG "Window Bound")
+    ![Window Bound](./images/WindowBound.PNG "Window Bound")
 
     ![Window Rank](./images/WindowRank.PNG "Window Rank")
 
