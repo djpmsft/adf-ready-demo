@@ -1,7 +1,7 @@
 {
 	"name": "Movie Analytics",
 	"properties": {
-		"description": "Use this template to get an understanding of how to leverage the capabilities of Copy and Mapping Data Flow in \n\nThis pipeline copies a delimited text movies database from S3 to ADLS gen 2 and then Executes a Mapping Data Flow to calculate aggregate metrics by year and genre, and then write to a SQL DW",
+		"description": "Use this template to get an understanding of how to leverage the capabilities of Copy and Mapping Data Flow in Azure Data Factory\n\nThis pipeline copies a delimited text movies database from S3 to ADLS gen 2 and then Executes a Mapping Data Flow to calculate aggregate metrics by year and genre, and then write to a SQL DW",
 		"activities": [
 			{
 				"name": "AggregateAndWriteToDW",
