@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "This Data Flow does the following:\n1. Take in a Movies csv file with 6 columns stored in ADLS\n2. Renaming one column and dropping another\n3. Filtering out movies released before 1900\n4. Deriving the primary genre as a new column from the existing genres column\n5. Windowing over year and primary genre to rank movies based on their Rotten Tomatoes rating\n6. Aggregating Movies based on year and primary genre to figure out average rating and the highest/lowest rated movies\n7. Specifying an Upsert condition\n8. Writing to a SQL DW sink",
 		"folder": {
-			"name": "ADF_Lab"
+			"name": "Movie Analytics"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {

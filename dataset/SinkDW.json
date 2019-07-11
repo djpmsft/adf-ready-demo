@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "ADF_Lab"
+			"name": "Movie Analytics"
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",

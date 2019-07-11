@@ -1,7 +1,7 @@
 {
-	"name": "ADF_Lab",
+	"name": "Movie Analytics",
 	"properties": {
-		"description": "This pipeline does the following:\n1. Copies a delimited text movies database from S3 to ADLS gen 2\n2. Executes a Mapping Data Flow to calculate aggregate metrics by year and genre, and then write to a SQL DW",
+		"description": "Use this template to get an understanding of how to leverage the capabilities of Copy and Mapping Data Flow in \n\nThis pipeline copies a delimited text movies database from S3 to ADLS gen 2 and then Executes a Mapping Data Flow to calculate aggregate metrics by year and genre, and then write to a SQL DW",
 		"activities": [
 			{
 				"name": "AggregateAndWriteToDW",
