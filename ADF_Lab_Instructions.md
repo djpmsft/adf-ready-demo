@@ -106,7 +106,7 @@ You have finished building your 8 transformation Mapping Data Flow. Its time to 
 
 ## Running the Pipeline
 
-Go back to the pipeline canvas. Before you publish your pipeline, run another debug run to confirm its working as expected. Looking at the Output tab, you monitor the status of both activities as they are running.
+Go back to the pipeline canvas. Because you are writing to a SQL DW in your Data FLow, you must use a blob staging folder. In the Execute Data Flow activity's settings tab, open up the PolyBase accordion and select your Blob linked service and specify a staging folder path. Before you publish your pipeline, run another debug run to confirm its working as expected. Looking at the Output tab, you can monitor the status of both activities as they are running.
 
 ![Full Debug](./images/FullDebug.PNG "Full Debug")
 
