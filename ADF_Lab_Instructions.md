@@ -41,11 +41,11 @@ The first step in our pipeline is creating a Copy Activity that copies the movie
 
 At this point, you have fully configured your copy activity. To test it out, click on the Debug button at the top of the pipeline canvas. This will start a pipeline debug run. To monitor the progress, click on the Output tab of the pipeline
 
-![Copy output](.\images\CopyOutput.png "Copy output")
+![Copy output](./images/CopyOutput.PNG "Copy output")
 
 To view a more detailed description of the activity output, click on the eyeglasses icon. This will open up the copy monitoring screen which provides useful metrics such as Data read/written, throughput and in-depth duration statistics.
 
-![Copy monitoring](.\images\CopyMonitoring.png "Copy monitoring")
+![Copy monitoring](./images/CopyMonitoring.PNG "Copy monitoring")
 
 To verify the copy worked as expected, open up your ADLS gen2 storage account and check to see your file was written as expected
 
@@ -60,58 +60,58 @@ Now that you have moved the data into ADLS, you are ready to build a Mapping Dat
     * Once your debug cluster is warmed up, you verify your data is loaded correctly via the Data Preview tab. Once you click the refresh button, Mapping Data Flow will show calculate a snapshot of what your data looks like when it is at each transformation.
 4. **Add a Select transformation to rename and drop a column** You may have noticed that the Rotton Tomatoes column is misspelled. To correctly name it and drop the unused Rating column, you can add a [Select transformation](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-select) by clicking on the + icon next to your ADLS source node. In the Name as field, change 'Rotton' to 'Rotten'. To drop the Rating column, hover over it and click on the trash can icon.
 
-    ![Select](.\images\Select.png "Select")
+    ![Select](./images/Select.PNG "Select")
 
 5. **Add a Filter Transformation to filter out unwanted years** Say you are only interested in movies made after 1950. You can add a [Filter transformation](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-filter) to specify a filter condition. Click on the expression box to open up the [Expression builder](https://docs.microsoft.com/en-us/azure/data-factory/concepts-data-flow-expression-builder) and enter in your filter condition. Using the syntax of the [Mapping Data Flow expression language](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-expression-functions), **toInteger(year) > 1950** will convert the string year value to an integer and filter rows if that value is above 1950.
 
     * You can use the expression builder's embedded Data preview pane to verify your condition is working properly
 
-    ![Filter](.\images\FilterExpression.png "Filter Expression")
+    ![Filter](./images/FilterExpression.PNG "Filter Expression")
 
 6. **Add a Derive Transformation to calculate primary genre** As you may have noticed, the genres column is a string delimited by a '|' character. If you only care about the first genre in each column, you can derive a new column via the [Derived Column](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-derived-column) transformation. Similar to the filter transformation, the derived column uses the Mapping Data Flow expression builder to specify the values of the new column.
 
-    ![Derive](.\images\Derive.png "Derive")
+    ![Derive](./images/Derive.PNG "Derive")
 
 7. **Rank movies via a Window Transformation** Say you are interested in how a movie ranks within its year for its specific genre. You can use a [Window transformation](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-window) to define window-based aggregations. To accomplish this, specify what you are windowing over, what you are sorting by, what the range is, and how to calculate your new window columns. In this example, we will window over PrimaryGenre and year with an unbounded range, sort by Rotten Tomato descending, a calculate a new column called RatingsRank which is equal to the rank each movie has within its specific genre-year.
 
-    ![Window Over](.\images\WindowOver.png "Window Over")
+    ![Window Over](./images/WindowOver.PNG "Window Over")
 
-    ![Window Sort](.\images\WindowSort.png "Window Sort")
+    ![Window Sort](./images/WindowSort.PNG "Window Sort")
 
-    ![Window Bound](.\images\Windowbound.png "Window Bound")
+    ![Window Bound](./images/Windowbound.PNG "Window Bound")
 
-    ![Window Rank](.\images\WindowRank.png "Window Rank")
+    ![Window Rank](./images/WindowRank.PNG "Window Rank")
 
 8. **Aggregate ratings with an Aggregate Transformation** Now that you have gathered and derived all our required data, we can add an [Aggregate transformation](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-aggregate) to calculate metrics based on a desired group. As you did in the window transformation, lets group movies by genre and year
 
-    ![Agg group by](.\images\AggGroupBy.png "Agg group by")
+    ![Agg group by](./images/AggGroupBy.PNG "Agg group by")
 
     In the Aggregates tab, you can aggregations calculated over the specified group by columns. For every genre and year, lets get the average Rotten Tomatoes rating, the highest and lowest rated movie (utilizing our windowing function) and the number of movies that are in each group. Aggregation significantly reduces the amount of rows in your transformation stream and only propagates the group by and aggregate columns specify in the transformation.
 
     * To see how the aggregate transformation changes your data, use the Data Preview tab
 
-    ![Aggregate](.\images\Aggregate.png "Aggregate")
+    ![Aggregate](./images/Aggregate.PNG "Aggregate")
 
 9. **Specify Upsert condition via an Alter Row Transformation** If you are writing to a tabular sink, you can specify insert, delete, update and upsert policies on rows using the [Alter Row transformation](https://docs.microsoft.com/en-us/azure/data-factory/data-flow-alter-row). Since you are always inserting and updating, you can specify that all rows will always be upserted.
 
-    ![Upsert](.\images\AlterRow.png "Upsert")
+    ![Upsert](./images/AlterRow.PNG "Upsert")
 
 10. **Write to a SQL DW Sink** Now that you have finished all your transformation logic, you are ready to write to a Sink. Create a new SQL DW dataset via the + New button. Point the dataset at your SQL DW linked service and select Create new table. Since an upsert condition was specified, you need to go to the Settings tab and select Allow upsert based on key columns PrimaryGenre and year.
 
-    ![Sink](.\images\Sink.png "Sink")
+    ![Sink](./images/Sink.PNG "Sink")
 
 You have finished building your 8 transformation Mapping Data Flow. Its time to run the pipeline and see the results.
 
-![Data Flow Canvas](.\images\DataFlowCanvas.png "Data Flow Canvas")
+![Data Flow Canvas](./images/DataFlowCanvas.PNG "Data Flow Canvas")
 
 ## Running the Pipeline
 
 Go back to the pipeline canvas. Before you publish your pipeline, run another debug run to confirm its working as expected. Looking at the Output tab, you monitor the status of both activities as they are running.
 
-![Full Debug](.\images\FullDebug.png "Full Debug")
+![Full Debug](./images/FullDebug.PNG "Full Debug")
 
 Once both activities succeeded, you can click on the eyeglasses icon next to the Data Flow activity to get a more in depth look at the Data Flow run.
 
-![Data Flow Monitoring](.\images\DataFlowMonitoring.png "Data Flow monitoring")
+![Data Flow Monitoring](./images/DataFlowMonitoring.PNG "Data Flow monitoring")
 
 Your Data Flow should have written 737 rows to your SQL DW. You can go into [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017) to verify the pipeline worked correctly and see what got written.
