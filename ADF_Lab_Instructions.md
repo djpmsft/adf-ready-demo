@@ -37,7 +37,7 @@ The first step in our pipeline is creating a Copy Activity that copies the movie
     * In the Source tab, click + New
     * Select the Azure Data lake Storage Gen2 tile and click continue
     * Select the DelimitedText format tile and click continue
-    * In Set Properties sidenav, select your S3 linked service. Point the folder where you want moviesDB.csv copied to. Set First row as header to be true. Import schema from sample file (use the moviesDB.csv file). Click finish once completed.
+    * In Set Properties sidenav, select your ADLS Gen2 linked service. Point the folder where you want moviesDB.csv copied to. Set First row as header to be true. Import schema from sample file (use the moviesDB.csv file). Click finish once completed.
 
 At this point, you have fully configured your copy activity. To test it out, click on the Debug button at the top of the pipeline canvas. This will start a pipeline debug run. To monitor the progress, click on the Output tab of the pipeline
 
