@@ -54,11 +54,11 @@ To verify the copy worked as expected, open up your ADLS gen2 storage account an
 
 Now that you have moved the data into ADLS, you are ready to build a Mapping Data Flow which will transform your data at scale via a spark cluster and then load it into a Data Warehouse. For more information on Mapping Data Flows, see the [Mapping Data Flow documentation](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-overview).
 
-1. **Turn on Data Flow Debug** Turn the Data Flow Debug slider on. Data Flow clusters take 5-7 minutes to warm up and users are recommended to turn on debug first if they plan to do Data Flow development. For more information, see [Debug Mode](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-debug-mode)
-2. **Add a Data Flow activity** In the Activities pane, open the Move and Transform accordion and drag the DAta Flow activity onto the pipeline canvas. In the sidenav that pops up, select Create new Data Flow and select Mapping Data Flow. Drag the green box from your Copy activity to the Data Flow Activity to create an on success condition.
+1. **Turn on Data Flow Debug** Turn the Data Flow Debug slider located at the top of the authoring module on. Data Flow clusters take 5-7 minutes to warm up and users are recommended to turn on debug first if they plan to do Data Flow development. For more information, see [Debug Mode](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-debug-mode)
+2. **Add a Data Flow activity** In the Activities pane, open the Move and Transform accordion and drag the Data Flow activity onto the pipeline canvas. In the sidenav that pops up, select Create new Data Flow and select Mapping Data Flow. Go back to the pipeline canvas and drag the green box from your Copy activity to the Data Flow Activity to create an on success condition.
 3. **Add an ADLS source** Open the Data Flow canvas. Click on the Add Source button in the Data Flow canvas. In the source dataset dropdown, select your ADLS Gen2 dataset used in your Copy activity
     * If your dataset is pointing at a folder with other files, you may need to create another dataset or utilize parameterization to make sure only the moviesDB.csv file is read
-    * Once your debug cluster is warmed up, you verify your data is loaded correctly via the Data Preview tab. Once you click the refresh button, Mapping Data Flow will show calculate a snapshot of what your data looks like when it is at each transformation.
+    * Once your debug cluster is warmed up, verify your data is loaded correctly via the Data Preview tab. Once you click the refresh button, Mapping Data Flow will show calculate a snapshot of what your data looks like when it is at each transformation.
 4. **Add a Select transformation to rename and drop a column** You may have noticed that the Rotton Tomatoes column is misspelled. To correctly name it and drop the unused Rating column, you can add a [Select transformation](https://docs.microsoft.com/azure/data-factory/data-flow-select) by clicking on the + icon next to your ADLS source node and choosing Select under Schema modifier. In the Name as field, change 'Rotton' to 'Rotten'. To drop the Rating column, hover over it and click on the trash can icon.
 
     ![Select](./images/Select.PNG "Select")
@@ -93,7 +93,7 @@ Now that you have moved the data into ADLS, you are ready to build a Mapping Dat
 
     ![Agg group by](./images/AggGroupBy.PNG "Agg group by")
 
-    In the Aggregates tab, you can aggregations calculated over the specified group by columns. For every genre and year, lets get the average Rotten Tomatoes rating, the highest and lowest rated movie (utilizing our windowing function) and the number of movies that are in each group. Aggregation significantly reduces the amount of rows in your transformation stream and only propagates the group by and aggregate columns specify in the transformation.
+    In the Aggregates tab, you can aggregations calculated over the specified group by columns. For every genre and year, lets get the average Rotten Tomatoes rating, the highest and lowest rated movie (utilizing our windowing function) and the number of movies that are in each group. Aggregation significantly reduces the amount of rows in your transformation stream and only propagates the group by and aggregate columns specified in the transformation.
 
     * To see how the aggregate transformation changes your data, use the Data Preview tab
 
@@ -107,13 +107,13 @@ Now that you have moved the data into ADLS, you are ready to build a Mapping Dat
 
     ![Sink](./images/Sink.PNG "Sink")
 
-At this point, You have finished building your 8 transformation Mapping Data Flow. Its time to run the pipeline and see the results.
+At this point, You have finished building your 8 transformation Mapping Data Flow. It's time to run the pipeline and see the results.
 
 ![Data Flow Canvas](./images/DataFlowCanvas.PNG "Data Flow Canvas")
 
 ## Running the Pipeline
 
-Go back to the pipeline canvas. Because SQL DW in Data Flow uses [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017), you must specify a blob staging folder. In the Execute Data Flow activity's settings tab, open up the PolyBase accordion and select your Blob linked service and specify a staging folder path. Before you publish your pipeline, run another debug run to confirm its working as expected. Looking at the Output tab, you can monitor the status of both activities as they are running.
+Go back to the pipeline canvas. Because SQL DW in Data Flow uses [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017), you must specify a blob staging folder. In the Execute Data Flow activity's settings tab, open up the PolyBase accordion and select your Blob linked service and specify a staging folder path. Before you publish your pipeline, run another debug run to confirm it's working as expected. Looking at the Output tab, you can monitor the status of both activities as they are running.
 
 ![Full Debug](./images/FullDebug.PNG "Full Debug")
 
