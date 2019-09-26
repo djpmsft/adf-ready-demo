@@ -33,7 +33,6 @@ The pipeline created in this lab is available via the Azure Data Factory [Templa
   * To retrieve the file from GitHub, click 'Raw' and then copy the contents to a text editor of your choice to save locally as a .csv file
 * **Create your linked services** You will need to create four linked services for this lab
   * [ADLS Gen2](https://docs.microsoft.com/azure/data-factory/connector-azure-data-lake-storage)
-  * [Azure Blob Storage](https://docs.microsoft.com/azure/data-factory/connector-azure-blob-storage)
   * [Azure SQL DW](https://docs.microsoft.com/azure/data-factory/connector-azure-sql-data-warehouse)
   * [Amazon S3](https://docs.microsoft.com/azure/data-factory/connector-amazon-simple-storage-service)
   
@@ -127,7 +126,7 @@ At this point, You have finished building your 8 transformation Mapping Data Flo
 
 ## Running the Pipeline
 
-Go back to the pipeline canvas. Because SQL DW in Data Flow uses [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017), you must specify a blob staging folder. In the Execute Data Flow activity's settings tab, open up the PolyBase accordion and select your Blob linked service and specify a staging folder path. Before you publish your pipeline, run another debug run to confirm it's working as expected. Looking at the Output tab, you can monitor the status of both activities as they are running.
+Go back to the pipeline canvas. Because SQL DW in Data Flow uses [PolyBase](https://docs.microsoft.com/sql/relational-databases/polybase/polybase-guide?view=sql-server-2017), you must specify a blob or ADLS staging folder. In the Execute Data Flow activity's settings tab, open up the PolyBase accordion and select your ADLS linked service and specify a staging folder path. Before you publish your pipeline, run another debug run to confirm it's working as expected. Looking at the Output tab, you can monitor the status of both activities as they are running.
 
 ![Full Debug](./images/FullDebug.PNG "Full Debug")
 
