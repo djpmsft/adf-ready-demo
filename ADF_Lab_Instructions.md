@@ -49,61 +49,61 @@ The pipeline created in this lab is available via the Azure Data Factory [Templa
 Once your data factory is created and you open the ADF UX, the first step in your pipeline is creating a Copy Activity that copies the moviesDB.csv file from S3 or GitHub to ADLS Gen2 storage.
 
 1. **Open the authoring canvas** If coming from the ADF homepage, click on the pencil icon on the left sidebar or the create pipeline button to open the authoring canvas.
-    ![Authoring](./images/authoring1.PNG)
+    ![Authoring](./images/authoring1.png)
 1. **Create the pipeline** Click on the + button in the Factory Resources pane and select Pipeline
-    ![Authoring](./images/authoring2.PNG)
+    ![Authoring](./images/authoring2.png)
 1. **Add a copy activity** In the Activities pane, open the Move and Transform accordion and drag the Copy Data activity onto the pipeline canvas
-    ![Authoring](./images/authoring3.PNG)
+    ![Authoring](./images/authoring3.png)
 1. **[If using S3] Create a new S3 dataset to use as a source**
     1. In the Source tab of the Copy activity settings, click '+ New'
-    ![Authoring](./images/authoring4.PNG)
+    ![Authoring](./images/authoring4.png)
     1. In the data store list, select the Amazon S3 tile and click continue
-    ![Authoring](./images/authoring5.PNG)
+    ![Authoring](./images/authoring5.png)
     1. In the file format list, select the DelimitedText format tile and click continue
-    ![Authoring](./images/authoring6.PNG)
+    ![Authoring](./images/authoring6.png)
     1. In Set Properties sidenav, give your dataset an understandable name and click on the Linked Service dropdown. If you have not created your S3 Linked Service, select 'New'.
-    ![Authoring](./images/authoring7.PNG)
+    ![Authoring](./images/authoring7.png)
     1. In the S3 Linked Service configuration pane, specify your S3 access key and secret key. The data factory service encrypts credentials with certificates managed by Microsoft. For more information, see [Data Movement Security Considerations](https://docs.microsoft.com/azure/data-factory/data-movement-securi7ty-considerations). To verify your credentials are valid, click 'Test Connection. Click 'Create' when finished.
-    ![Authoring](./images/authoring8.PNG)
+    ![Authoring](./images/authoring8.png)
     1. Once you have created and selected the linked service, specify the rest of your dataset settings. These settings specify how and where in your connection we want to pull the data. Point the file path to where you uploaded the moviesDB.csv file. In the below example, moviesDB.csv is located in S3 bucket 'daperlov-test'. As the data has a header in the first row, set 'First row as header' to be true and select Import schema from connection/store to pull the schema from the file itself. Click Finish once completed.
-    ![Authoring](./images/authoring9.PNG)
+    ![Authoring](./images/authoring9.png)
     1. To verify your dataset is configured correctly, click 'Preview Data' in the Source tab of the copy activity to get a small snapshot of your data.
-    ![Authoring](./images/authoring13.PNG)
+    ![Authoring](./images/authoring13.png)
 1. **[If NOT using S3] Create a new HTTP dataset to use as a source**
     1. In the Source tab of the Copy activity settings, click '+ New'
-    ![Authoring](./images/authoring4.PNG)
+    ![Authoring](./images/authoring4.png)
     1. In the data store list, select the HTTP tile and click continue
-    ![Authoring](./images/authoring10.PNG)
+    ![Authoring](./images/authoring10.png)
     1. In the file format list, select the DelimitedText format tile and click continue
-    ![Authoring](./images/authoring6.PNG)
+    ![Authoring](./images/authoring6.png)
     1. In Set Properties sidenav, give your dataset an understandable name and click on the Linked Service dropdown. If you have not created your HTTP Linked Service, select 'New'.
-    ![Authoring](./images/authoring7.PNG)
+    ![Authoring](./images/authoring7.png)
     1. In the HTTP Linked Service configuration pane, specify the url of the moviesDB csv file. You can access the data with no authentication required using the following endpoint:
 
     https://raw.githubusercontent.com/djpmsft/adf-ready-demo/master/moviesDB.csv
 
-    ![Authoring](./images/authoring11.PNG)
+    ![Authoring](./images/authoring11.png)
     a. Once you have created and selected the linked service, specify the rest of your dataset settings. These settings specify how and where in your connection we want to pull the data. As the url is pointed at the file already, no relative endpoint is required. As the data has a header in the first row, set 'First row as header' to be true and select Import schema from connection/store to pull the schema from the file itself. Select Get as the request method. Click 'Finish' once completed.
-    ![Authoring](./images/authoring12.PNG)
+    ![Authoring](./images/authoring12.png)
     a. To verify your dataset is configured correctly, click 'Preview Data' in the Source tab of the copy activity to get a small snapshot of your data.
-    ![Authoring](./images/authoring13.PNG)
+    ![Authoring](./images/authoring13.png)
 1. **Create a new ADLS Gen2 dataset sink**
     1. In the Sink tab, click + New
-    ![Authoring](./images/authoring14.PNG)
+    ![Authoring](./images/authoring14.png)
     1. Select the Azure Data lake Storage Gen2 tile and click continue
-    ![Authoring](./images/authoring15.PNG)
+    ![Authoring](./images/authoring15.png)
     1. Select the DelimitedText format tile and click continue
-    ![Authoring](./images/authoring6.PNG)
+    ![Authoring](./images/authoring6.png)
     1. In Set Properties sidenav, give your dataset an understandable name and click on the Linked Service dropdown. If you have not created your ADLS Linked Service, select 'New'.
-    ![Authoring](./images/authoring7.PNG)
+    ![Authoring](./images/authoring7.png)
     1. In the ADLS linked service configuration pane, select your authentication method and enter your credentials. In the example below, I used account key and selected my storage account from the drop down.
-    ![Authoring](./images/authoring16.PNG)
+    ![Authoring](./images/authoring16.png)
     1. Once you have configured your linked service, enter in the ADLS dataset configuration. As you are writing to this dataset, you want to point the folder where you want moviesDB.csv copied to. In the example below, I am writing to folder 'output' in the container 'sample-data'. While the folder can be dynamically created, the container must exist prior to writing to it. Set First row as header to be true. You can either Import schema from sample file (use the moviesDB.csv file) or not specify a schema at this time. Click finish once completed.
-    ![Authoring](./images/authoring17.PNG)
+    ![Authoring](./images/authoring17.png)
 
 At this point, you have fully configured your copy activity. To test it out, click on the Debug button at the top of the pipeline canvas. This will start a pipeline debug run.
 
-![Authoring](./images/authoring18.PNG)
+![Authoring](./images/authoring18.png)
 
 To monitor the progress of a pipeline debug run, click on the Output tab of the pipeline
 
