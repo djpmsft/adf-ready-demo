@@ -43,11 +43,6 @@ The pipeline created in this lab is available via the Azure Data Factory [Templa
     ![Azure Portal](./images/portal4.PNG)
 
 **[Only if using S3] Upload the [MoviesDB csv file](./moviesDB.csv) to S3 storage:** To retrieve the file from GitHub, click 'Raw' and then copy the contents to a text editor of your choice to save locally as a .csv file
-
-1. **Create your linked services** You will need to create four linked services for this lab
-  * [ADLS Gen2](https://docs.microsoft.com/azure/data-factory/connector-azure-data-lake-storage)
-  * [Azure SQL DW](https://docs.microsoft.com/azure/data-factory/connector-azure-sql-data-warehouse)
-  * [Amazon S3](https://docs.microsoft.com/azure/data-factory/connector-amazon-simple-storage-service)
   
 ## Ingesting data into Azure Data Lake Storage Gen2
   
