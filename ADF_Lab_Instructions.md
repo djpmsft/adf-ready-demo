@@ -29,18 +29,18 @@ The pipeline created in this lab is available via the Azure Data Factory [Templa
 **Create your data factory:** Use the [Azure Portal](https://portal.azure.com) to create your Data Factory. Detailed instructions can be found at [Create a Data Factory](https://docs.microsoft.com/azure/data-factory/quickstart-create-data-factory-portal).
 
 1. Once in the Azure Portal, click on the **All Services** button on the left hand-side and select "Data Factories" in the Analytics section.
-    ![Azure Portal](./images/portal1.PNG)
+    ![Azure Portal](./images/portal1.png)
 
 1. Click **Add** to open the Data Factory creation screen
-    ![Azure Portal](./images/portal2.PNG)
+    ![Azure Portal](./images/portal2.png)
 
 1. Specify your Data Factory configuration settings in the creation pane. Choose a globally unique data factory name and select your subscription, resource group, and region. Your data factory must be version V1. Once you are done, click **Create**. Your data factory may take a couple minutes to deploy.
     * Mapping Data Flow is not currently available in the following data factory regions: West Central US, Brazil South, Korea Central and France Central. For the purposes of this lab, please do not create your data factory in one of these reasons. 
     * ADF's integration with Azure DevOps and Github will not be covered in this lab. To enable this feature, check **Enable Git** and specify your configuration information. See [Source Control in Azure Data Factory](https://docs.microsoft.com/azure/data-factory/source-control#troubleshooting-git-integration).
-    ![Azure Portal](./images/portal3.PNG)
+    ![Azure Portal](./images/portal3.png)
 
 1. Once your data factory is deployed, go to the resource and click on **Authoring and Monitoring** to open the ADF user experience (UX). You can access the UX via adf.azure.com.
-    ![Azure Portal](./images/portal4.PNG)
+    ![Azure Portal](./images/portal4.png)
 
 **[Only if using S3] Upload the [MoviesDB csv file](./moviesDB.csv) to S3 storage:** To retrieve the file from GitHub, click 'Raw' and then copy the contents to a text editor of your choice to save locally as a .csv file
   
