@@ -34,12 +34,12 @@ The pipeline created in this lab is available via the Azure Data Factory [Templa
 1. Click **Add** to open the Data Factory creation screen
     ![Azure Portal](./images/portal2.png)
 
-1. Specify your Data Factory configuration settings in the creation pane. Choose a globally unique data factory name and select your subscription, resource group, and region. Your data factory must be version V1. Once you are done, click **Create**. Your data factory may take a couple minutes to deploy.
+1. Specify your Data Factory configuration settings in the creation pane. Choose a globally unique data factory name and select your subscription, resource group, and region. Your data factory must be version V2. Once you are done, click **Create**. Your data factory may take a couple minutes to deploy.
     * Mapping Data Flow is not currently available in the following data factory regions: West Central US, Brazil South, Korea Central and France Central. For the purposes of this lab, please do not create your data factory in one of these reasons. 
     * ADF's integration with Azure DevOps and Github will not be covered in this lab. To enable this feature, check **Enable Git** and specify your configuration information. See [Source Control in Azure Data Factory](https://docs.microsoft.com/azure/data-factory/source-control#troubleshooting-git-integration).
     ![Azure Portal](./images/portal3.png)
 
-1. Once your data factory is deployed, go to the resource and click on **Authoring and Monitoring** to open the ADF user experience (UX). You can access the UX via adf.azure.com.
+1. Once your data factory is deployed, go to the resource and click on **Author and Monitor** to open the ADF user experience (UX). You can access the UX via adf.azure.com.
     ![Azure Portal](./images/portal4.png)
 
 **[Only if using S3] Upload the [MoviesDB csv file](./moviesDB.csv) to S3 storage:** To retrieve the file from GitHub, click 'Raw' and then copy the contents to a text editor of your choice to save locally as a .csv file
@@ -119,10 +119,10 @@ To verify the copy worked as expected, open up your ADLS gen2 storage account an
 
 Now that you have moved the data into ADLS, you are ready to build a Mapping Data Flow which will transform your data at scale via a spark cluster and then load it into a Data Warehouse. For more information on Mapping Data Flows, see the [Mapping Data Flow documentation](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-overview).
 
-1. **Turn on Data Flow Debug** Turn the Data Flow Debug slider located at the top of the authoring module on. Data Flow clusters take 5-7 minutes to warm up and users are recommended to turn on debug first if they plan to do Data Flow development. For more information, see [Debug Mode](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-debug-mode)
-    ![Data Flow](./images/dataflow1.png)
 1. **Add a Data Flow activity** In the Activities pane, open the Move and Transform accordion and drag the Data Flow activity onto the pipeline canvas. In the sidenav that pops up, select Create new Data Flow and select Mapping Data Flow. Go back to the pipeline canvas and drag the green box from your Copy activity to the Data Flow Activity to create an on success condition.
     ![Data Flow](./images/dataflow2.png)
+1. **Turn on Data Flow Debug** Turn the Data Flow Debug slider located at the top of the authoring module on. Data Flow clusters take 5-7 minutes to warm up and users are recommended to turn on debug first if they plan to do Data Flow development. Note: You can only enable Data Flow Debug when you have a Data Flow activity in your pipeline. For more information, see [Debug Mode](https://docs.microsoft.com/azure/data-factory/concepts-data-flow-debug-mode)
+    ![Data Flow](./images/dataflow1.png)
 1. **Add an ADLS source** Open the Data Flow canvas. Click on the Add Source button in the Data Flow canvas. In the source dataset dropdown, select your ADLS Gen2 dataset used in your Copy activity
     ![Data Flow](./images/dataflow3.png)
     * If your dataset is pointing at a folder with other files, you may need to create another dataset or utilize parameterization to make sure only the moviesDB.csv file is read
