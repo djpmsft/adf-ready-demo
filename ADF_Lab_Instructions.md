@@ -6,6 +6,8 @@ In this Lab, you will utilize Azure Data Factory's visual authoring experience t
 
 The pipeline created in this lab is available via the Azure Data Factory [Template Gallery](https://azure.microsoft.com/blog/get-started-quickly-using-templates-in-azure-data-factory/) under the name **Movie Analytics**
 
+Please allot about two hours to complete this lab end to end. 
+
 ## Prerequisites
 
 * **Azure subscription**: If you don't have an Azure subscription, create
